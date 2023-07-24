@@ -16,7 +16,7 @@ from torch.distributed.fsdp import (
 )
 from torch.distributed.fsdp.wrap import transformer_auto_wrap_policy
 from torch.utils.data import DataLoader
-from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, Adafactor
+from transformers import AutoModelForCausalLM, AutoTokenizer, Adafactor
 from transformers.models.t5.modeling_t5 import T5Block
 
 from data_loading import TextToTextDataset
@@ -98,7 +98,7 @@ class LightningModel(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters(hparams)
         print(self.hparams)
-        self.model = AutoModelForSeq2SeqLM.from_pretrained(
+        self.model = AutoModelForCausalLM.from_pretrained(
             self.hparams.model_name_or_path
         )
         print(dict(orig_state_dict=len(self.model.state_dict())))
