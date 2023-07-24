@@ -222,7 +222,7 @@ def main(raw_args=None):
         )
 
     trainer = pl.Trainer(
-        precision="float16",
+        precision="16",
         accelerator="gpu",
         strategy=strategy,
         accumulate_grad_batches=1 if args.debug else args.gradient_accumulation_steps,
